@@ -1,42 +1,47 @@
 package application;
 
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Contract;
-import model.services.RegistrationOfInstallments;
+import model.entities.Installment;
+import model.services.ContractService;
+import model.services.PaypalService;
+
 
 public class App {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws ParseException{
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Enter constract data");
         System.out.print("Number: ");
-        int number = sc.nextInt();
-        System.out.print("Year of contract: ");
-        int year = sc.nextInt();
-        System.out.print("Month of contract: ");
-        int month = sc.nextInt();
-        System.out.print("day of contract: ");
-        int day = sc.nextInt();
+        Integer number = sc.nextInt();
+        System.out.print("Date (dd/MM/yyyy): ");
+        Date date = sdf.parse(sc.next());
         System.out.print("Contract value: ");
         double totalPayment = sc.nextDouble();
 
-        Contract contract = new Contract(number, LocalDate.of(year, month, day), totalPayment);
+        Contract contract = new Contract(number, date, totalPayment);
 
+        ContractService cs = new ContractService(new PaypalService());
+        
         System.out.print("Enter number of installments: ");
         int numberOfInstallments = sc.nextInt();
 
-        RegistrationOfInstallments regInstallments = new RegistrationOfInstallments(numberOfInstallments);
-
-        regInstallments.createInstallments(contract);
+        cs.processContract(contract, numberOfInstallments);
 
         System.out.println();
         System.out.println("Installments: ");
-        contract.printOfInstallments();
+        for (Installment it : contract.getInstallments()) {
+            System.out.println(it);
+        }
         sc.close();
 
     }

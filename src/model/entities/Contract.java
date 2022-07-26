@@ -1,13 +1,13 @@
 package model.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Contract {
     
     private Integer number;
-    private LocalDate date;
+    private Date date;
     private double totalPayment; 
     
     List<Installment> installments = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Contract {
 
     public Contract() {}
 
-    public Contract(Integer number, LocalDate date, double totalPayment) {
+    public Contract(Integer number, Date date, double totalPayment) {
         this.number = number;
         this.date = date;
         this.totalPayment = totalPayment;  
@@ -29,11 +29,11 @@ public class Contract {
         this.number = number;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

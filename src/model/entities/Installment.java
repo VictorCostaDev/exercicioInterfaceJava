@@ -1,24 +1,27 @@
 package model.entities;
 
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Installment {
     
-    private LocalDate date;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
+    private Date date;
     private Double value;  
 
     public Installment() {}
-    
-    public Installment(LocalDate date, Double value) {
+
+    public Installment(Date date, Double value) {
         this.date = date;
         this.value = value;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -30,6 +33,12 @@ public class Installment {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return sdf.format(date) + " - " + String.format("%.2f", value);
+    }
+
+    
     
     
 }
