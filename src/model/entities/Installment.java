@@ -5,8 +5,10 @@ import java.time.LocalDate;
 public class Installment {
     
     private LocalDate date;
-    private Double value;  // Services
+    private Double value;  
 
+    public Installment() {}
+    
     public Installment(LocalDate date, Double value) {
         this.date = date;
         this.value = value;

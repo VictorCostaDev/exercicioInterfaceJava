@@ -10,8 +10,10 @@ public class Contract {
     private LocalDate date;
     private double totalPayment; 
     
-    private List<Installment> installments = new ArrayList<>();
+    List<Installment> installments = new ArrayList<>();
 
+
+    public Contract() {}
 
     public Contract(Integer number, LocalDate date, double totalPayment) {
         this.number = number;
@@ -41,6 +43,10 @@ public class Contract {
 
     public void setTotalPayment(double totalPayment) {
         this.totalPayment = totalPayment;
+    }
+
+    public List<Installment> getInstallments() {
+        return installments;
     }
 
     public void addInstallment(Installment installment) {
